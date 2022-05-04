@@ -29,6 +29,11 @@ class WhatsappBot {
   static async googleSearch(req, res, next) {
     const twiml = new MessagingResponse();
     const q = req.body.Body;
+    if (q == "1") {
+      twiml.message("You have selected English");
+      res.set('Content-Type', 'text/xml');
+      return res.status(200).send(twiml.toString());
+    }
     const options = { cx, q, auth: googleApiKey };
 
     try {

@@ -29,8 +29,18 @@ class WhatsappBot {
   static async googleSearch(req, res, next) {
     const twiml = new MessagingResponse();
     const q = req.body.Body;
+    if (q == "" || q.toLowerCase() == "start" ||  q.includes("buenas") ||  q.toLowerCase() == "hellow") {
+      twiml.message("Saludo de respuesta automático: \n 1. *English* \n 2. *Español*");
+      res.set('Content-Type', 'text/xml');
+      return res.status(200).send(twiml.toString());
+    }
     if (q == "1") {
       twiml.message("You have selected English");
+      res.set('Content-Type', 'text/xml');
+      return res.status(200).send(twiml.toString());
+    }
+    if (q == "2") {
+      twiml.message("Haz seleccionado español.");
       res.set('Content-Type', 'text/xml');
       return res.status(200).send(twiml.toString());
     }
